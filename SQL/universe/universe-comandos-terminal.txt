@@ -1,0 +1,73 @@
+psql --username=freecodecamp --dbname=postgres
+CREATE DATABASE universe;
+\c universe
+
+CREATE TABLE galaxy();
+CREATE TABLE star();
+CREATE TABLE planet();
+CREATE TABLE moon();
+CREATE TABLE blackhole();
+
+
+                                                                   
+ALTER TABLE galaxy ADD COLUMN galaxy_id SERIAL PRIMARY KEY;
+
+ALTER TABLE galaxy ADD COLUMN name VARCHAR(50) NOT NULL UNIQUE;
+
+ALTER TABLE galaxy ADD COLUMN has_life BOOL;
+
+ALTER TABLE galaxy ADD COLUMN age_in_million_of_years INT;
+
+ALTER TABLE galaxy ADD COLUMN description TEXT NOT NULL;
+
+
+
+ALTER TABLE star ADD COLUMN star_id SERIAL PRIMARY KEY;
+
+ALTER TABLE star ADD COLUMN name VARCHAR(50) NOT NULL UNIQUE;
+
+ALTER TABLE star ADD COLUMN age_in_million_of_years INT;
+
+ALTER TABLE star ADD COLUMN radius_in_km NUMERIC;
+
+ALTER TABLE star ADD COLUMN galaxy_id INT NOT NULL;
+
+ALTER TABLE star ADD FOREIGN KEY(galaxy_id) REFERENCES galaxy(galaxy_id);
+
+
+
+
+ALTER TABLE planet ADD COLUMN planet_id SERIAL PRIMARY KEY;
+
+ALTER TABLE planet ADD COLUMN name VARCHAR(50) NOT NULL UNIQUE;
+
+ALTER TABLE planet ADD COLUMN age_in_million_of_years INT;
+
+ALTER TABLE planet ADD COLUMN star_id INT NOT NULL;
+
+ALTER TABLE planet ADD FOREIGN KEY(star_id) REFERENCES star(star_id);
+
+ALTER TABLE planet ADD COLUMN has_life BOOL NOT NULL;
+
+
+
+ALTER TABLE moon ADD COLUMN moon_id SERIAL PRIMARY KEY;
+
+ALTER TABLE moon ADD COLUMN name VARCHAR(50) NOT NULL UNIQUE;
+
+ALTER TABLE moon ADD COLUMN age_in_million_of_years INT;
+
+ALTER TABLE moon ADD COLUMN radius_in_km NUMERIC;
+
+ALTER TABLE moon ADD COLUMN planet_id INT NOT NULL;
+
+ALTER TABLE moon ADD FOREIGN KEY (planet_id) REFERENCES planet(planet_id);
+
+
+
+ALTER TABLE blackhole ADD COLUMN blackhole_id SERIAL PRIMARY KEY;
+
+ALTER TABLE blackhole ADD COLUMN name VARCHAR(50) NOT NULL UNIQUE;
+
+ALTER TABLE blackhole ADD COLUMN radius_in_km NUMERIC;
+
